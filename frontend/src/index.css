@@ -1,5 +1,11 @@
+body {
+  /* background-color: #dededc; */
+  /* color: #575757; */
+}
+
 main {
   min-height: 80vh;
+  /* background-color: #85775b; */
 }
 
 h3 {
@@ -32,7 +38,7 @@ h2 {
 }
 
 .carousel-caption h2 {
-  color: #fff;
+  color: #575757;
 }
 
 .carousel img {
