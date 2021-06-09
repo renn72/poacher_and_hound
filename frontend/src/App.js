@@ -57,8 +57,8 @@ const App = () => {
             component={HomeScreen}
             exact
           />
-          <Route path='/' component={Cafe} exact />
         </Container>
+        <Route path='/' component={Cafe} exact />
       </main>
       <Footer />
     </Router>

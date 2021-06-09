@@ -68,7 +68,7 @@ h2 {
   width: 100%;
   height: 100%;
   /* height: auto; */
-  /* position: relative; */
+  /* position: absolute; */
   object-fit: cover;
   filter: brightness(50%);
 }
@@ -93,7 +93,7 @@ h2 {
 #poacher-header-container {
   position: absolute;
   z-index: 5;
-  top: 30vh;
+  top: 45vh;
   left: 0;
   right: 0;
   margin-left: auto;
@@ -105,11 +105,49 @@ h2 {
   height: 80vh;
   width: 100%;
   overflow: hidden;
-  position: absolute;
+  /* position: absolute; */
   left: 0;
 }
 
 .light {
   color: #dededc;
-  font-size: 1rem;
+  font-size: 1.2rem;
+}
+
+.center {
+  text-align: center;
+}
+
+.bg-main {
+  background-color: #dededc;
+}
+
+.cafe-info-box {
+  text-align: center;
+  background-color: #dededc;
+}
+
+.cafe-cards {
+  width: 80%;
+}
+
+.cafe-cards-container {
+  width: 100%;
+  background-color: #fff;
+}
+
+.cafe-card-img {
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  min-width: 200px;
+}
+
+.cafe-container {
+  background-color: #fff;
+}
+
+.center-me {
+  display: flex;
+  justify-content: center;
 }
