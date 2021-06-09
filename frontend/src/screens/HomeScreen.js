@@ -25,7 +25,7 @@ const HomeScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
-    <div>
+    <div className='py-3'>
       <Meta />
       {!keyword ? (
         <ProductCarousel />

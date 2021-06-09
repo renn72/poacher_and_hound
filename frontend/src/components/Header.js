@@ -37,6 +37,9 @@ const Header = () => {
             {/* <Route render={({ history }) => <SearchBox history={history} />} /> */}
 
             <Nav className='ms-auto'>
+              <LinkContainer to='/catering'>
+                <Nav.Link>Catering</Nav.Link>
+              </LinkContainer>
               <LinkContainer to='/cart'>
                 <Nav.Link>
                   <i className='fas fa-shopping-cart'></i> Cart
