@@ -10,64 +10,61 @@ import {
   Button,
   Form,
 } from 'react-bootstrap';
-import Rating from '../components/Rating';
+// import Rating from '../components/Rating';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Meta from '../components/Meta';
-import {
-  listProductDetails,
-  createProductReview,
-} from '../actions/productActions';
-import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
+import { listProductDetails } from '../actions/productActions'; // removed createProductReview from import
+// import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants';
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  // const [rating, setRating] = useState(0);
+  // const [comment, setComment] = useState('');
 
   const dispatch = useDispatch();
 
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  // const userLogin = useSelector((state) => state.userLogin);
+  // const { userInfo } = userLogin;
 
-  const productReviewCreate = useSelector((state) => state.productReviewCreate);
-  const {
-    success: successProductReview,
-    loading: loadingProductReview,
-    error: errorProductReview,
-  } = productReviewCreate;
+  // const productReviewCreate = useSelector((state) => state.productReviewCreate);
+  // const {
+  //   success: successProductReview,
+  //   loading: loadingProductReview,
+  //   error: errorProductReview,
+  // } = productReviewCreate;
 
   useEffect(() => {
-    if (successProductReview) {
-      setRating(0);
-      setComment('');
-    }
+    // if (successProductReview) {
+    //   setRating(0);
+    //   setComment('');
+    // }
     if (!product._id || product._id !== match.params.id) {
       dispatch(listProductDetails(match.params.id));
-      dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
+      // dispatch({ type: PRODUCT_CREATE_REVIEW_RESET });
     }
-  }, [dispatch, match, successProductReview, product._id]);
+  }, [dispatch, match, product._id]); // removed successProductReview as a dependant
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    dispatch(
-      createProductReview(match.params.id, {
-        rating,
-        comment,
-      })
-    );
-  };
+  // const submitHandler = (e) => {
+  //   e.preventDefault();
+  //   dispatch(
+  //     createProductReview(match.params.id, {
+  //       rating,
+  //       comment,
+  //     })
+  //   );
+  // };
 
   return (
     <div>
-      <Link className='btn btn-light my-3' to='/'>
+      <Link className='btn btn-light my-3' to='/catering'>
         Go Back
       </Link>
       {loading ? (
@@ -86,13 +83,13 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroup.Item>
                   <h3>{product.name}</h3>
                 </ListGroup.Item>
-                <ListGroup.Item>
+                {/* <ListGroup.Item>
                   <Rating
                     value={product.rating}
                     text={`${product.numReviews} reviews`}
                   />
                 </ListGroup.Item>
-                <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
+                <ListGroup.Item>Price: ${product.price}</ListGroup.Item> */}
                 <ListGroup.Item>
                   Description: {product.description}
                 </ListGroup.Item>
@@ -107,6 +104,13 @@ const ProductScreen = ({ history, match }) => {
                       <Col>
                         <strong>${product.price}</strong>
                       </Col>
+                    </Row>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item>
+                    <Row>
+                      <Col>Size:</Col>
+                      <Col>M</Col>
                     </Row>
                   </ListGroup.Item>
 
@@ -156,7 +160,7 @@ const ProductScreen = ({ history, match }) => {
               </Card>
             </Col>
           </Row>
-          <Row>
+          {/* <Row>
             <Col md={6}>
               <h2>Reviews</h2>
               {product.reviews.length === 0 && <Message>No Reviews</Message>}
@@ -222,7 +226,7 @@ const ProductScreen = ({ history, match }) => {
                 </ListGroup.Item>
               </ListGroup>
             </Col>
-          </Row>
+          </Row> */}
         </div>
       )}
     </div>

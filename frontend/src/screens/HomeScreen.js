@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Container } from 'react-bootstrap';
 import Product from '../components/Product';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -25,16 +25,18 @@ const HomeScreen = ({ match }) => {
   }, [dispatch, keyword, pageNumber]);
 
   return (
-    <div className='py-3'>
+    <div className='py-4'>
       <Meta />
-      {!keyword ? (
-        <ProductCarousel />
-      ) : (
-        <Link to='/' className='btn btn-light'>
-          Go Back
-        </Link>
-      )}
-      <h1>Latest Products</h1>
+      <Container>
+        {!keyword ? (
+          <ProductCarousel />
+        ) : (
+          <Link to='/' className='btn btn-light'>
+            Go Back
+          </Link>
+        )}
+      </Container>
+      {/* <h1>Latest Products</h1> */}
       {loading ? (
         <Loader />
       ) : error ? (
