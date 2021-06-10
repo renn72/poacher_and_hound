@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const reviewSchema = mongoose.Schema(
   {
@@ -14,7 +14,12 @@ const reviewSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
+
+const priceSizeSchema = mongoose.Schema({
+  price: { type: Number, required: true },
+  size: { type: String, required: true },
+});
 
 const productSchema = mongoose.Schema(
   {
@@ -59,6 +64,17 @@ const productSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    size: {
+      type: String,
+      required: true,
+      default: 0,
+    },
+
+    list_order: {
+      type: Number,
+      require: true,
+      default: 0,
+    },
     countInStock: {
       type: Number,
       required: true,
@@ -68,8 +84,8 @@ const productSchema = mongoose.Schema(
   {
     timestamps: true,
   }
-)
+);
 
-const Product = mongoose.model('Product', productSchema)
+const Product = mongoose.model('Product', productSchema);
 
-export default Product
+export default Product;
