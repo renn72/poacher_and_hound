@@ -27,6 +27,7 @@
     - size
     - listOrder
     - countInStock
+    - user
   - Orders
     - User
     - orderItems
