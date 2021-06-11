@@ -11,12 +11,44 @@
 - Mark orders as delivered option
 - Checkout process (shipping, payment method, etc)
 
+- Data Models
+  - Users
+    - name
+    - email
+    - password
+    - isAdmin
+  - Products
+    - name
+    - image
+    - description
+    - brand
+    - category
+    - price
+    - size
+    - listOrder
+    - countInStock
+  - Orders
+    - User
+    - orderItems
+    - shippingAddress
+    - paymentMethod
+    - paymentResult
+    - taxPrice
+    - shippingPrice
+    - totalPrice
+    - isPaid
+    - paidAt
+    - isDelivered
+    - deliveredAt
+    - timeStamp
+
 ## Features to add
 
 - different sizes on the products
 - organize the products into category's
 - choice of pickup or delivery
 - limiting the delivery areas
+- currently can only ise local images
 
 ```
 Sample User Logins
