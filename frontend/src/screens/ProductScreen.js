@@ -67,22 +67,22 @@ const ProductScreen = ({ history, match }) => {
                     <Row>
                       <Col>Size:</Col>
                       <Col>
-                        <Form.Control
-                          as='select'
-                          value={size}
-                          onChange={(e) => setSize(e.target.value)}
-                        >
-                          {product.sizes.map((size, i) => (
-                            <option key={i} value={i}>
-                              {size}
-                            </option>
-                          ))}
-                          {/* {[...Array(product.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))} */}
-                        </Form.Control>
+                        {product.sizes.length > 1 ? (
+                          <Form.Control
+                            size='sm'
+                            as='select'
+                            value={size}
+                            onChange={(e) => setSize(e.target.value)}
+                          >
+                            {product.sizes.map((size, i) => (
+                              <option key={i} value={i}>
+                                {size}
+                              </option>
+                            ))}
+                          </Form.Control>
+                        ) : (
+                          <div>{product.sizes[0]}</div>
+                        )}
                       </Col>
                     </Row>
                   </ListGroup.Item>
