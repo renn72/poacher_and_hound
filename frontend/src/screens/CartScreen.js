@@ -8,7 +8,10 @@ import { addToCart, removeFromCart } from '../actions/cartActions'
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  const qty = location.search
+    ? Number(location.search.split('=')[1].split('?')[0])
+    : 1
+  const size = location.search ? Number(location.search.split('=')[2]) : 2
 
   const dispatch = useDispatch()
 
@@ -17,9 +20,9 @@ const CartScreen = ({ match, location, history }) => {
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, qty, size))
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, qty, size])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -28,6 +31,8 @@ const CartScreen = ({ match, location, history }) => {
   const checkoutHandler = () => {
     history.push('/login?redirect=shipping')
   }
+
+  console.log(cartItems)
 
   return (
     <Row>
@@ -55,7 +60,7 @@ const CartScreen = ({ match, location, history }) => {
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.product, Number(e.target.value))
+                          addToCart(item.product, Number(e.target.value), 0)
                         )
                       }
                     >
