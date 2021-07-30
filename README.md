@@ -27,6 +27,7 @@
     - size
     - listOrder
     - countInStock
+    - user
   - Orders
     - User
     - orderItems
@@ -48,7 +49,9 @@
 - organize the products into category's
 - choice of pickup or delivery
 - limiting the delivery areas
-- currently can only ise local images
+- password recovery
+- other payment systems
+- currently can only using locally stored images
 
 ```
 Sample User Logins
