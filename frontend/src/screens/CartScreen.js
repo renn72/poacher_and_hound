@@ -46,11 +46,11 @@ const CartScreen = ({ match, location, history }) => {
           <ListGroup variant='flush'>
             {cartItems.map((item) => (
               <ListGroup.Item key={item.product}>
-                <Row>
+                <Row className='align-items-center'>
                   <Col md={2}>
                     <Image src={item.image} alt={item.name} fluid rounded />
                   </Col>
-                  <Col md={3}>
+                  <Col md={2}>
                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                   </Col>
                   <Col md={2}>${item.price}</Col>
@@ -60,7 +60,11 @@ const CartScreen = ({ match, location, history }) => {
                       value={item.qty}
                       onChange={(e) =>
                         dispatch(
-                          addToCart(item.product, Number(e.target.value), 0)
+                          addToCart(
+                            item.product,
+                            Number(e.target.value),
+                            item.sizeId
+                          )
                         )
                       }
                     >
@@ -70,6 +74,28 @@ const CartScreen = ({ match, location, history }) => {
                         </option>
                       ))}
                     </Form.Control>
+                  </Col>
+                  <Col md={2}>
+                    {item.sizes.length > 1 ? (
+                      <Form.Control
+                        size='sm'
+                        as='select'
+                        value={item.sizeId}
+                        onChange={(e) =>
+                          dispatch(
+                            addToCart(item.product, item.qty, e.target.value)
+                          )
+                        }
+                      >
+                        {item.sizes.map((size, i) => (
+                          <option key={i} value={i}>
+                            {size}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    ) : (
+                      <div>{item.sizes[0]}</div>
+                    )}
                   </Col>
                   <Col md={2}>
                     <Button
