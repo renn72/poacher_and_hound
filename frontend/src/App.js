@@ -25,7 +25,7 @@ const App = () => {
     <Router>
       <Header />
       <main>
-        <Container>
+        <Container fluid='md'>
           <Route path='/catering' component={HomeScreen} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />
