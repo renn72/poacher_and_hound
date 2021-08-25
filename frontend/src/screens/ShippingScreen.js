@@ -14,6 +14,7 @@ const ShippingScreen = ({ history }) => {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '')
   const [country, setCountry] = useState(shippingAddress.country || '')
   const [alertText, setAlertText] = useState('')
+  const [pickup, setPickup] = useState('')
 
   const dispatch = useDispatch()
 
@@ -22,7 +23,10 @@ const ShippingScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault()
 
-    if (validPostCodes.filter((c) => c === postalCode).length === 0) {
+    if (
+      validPostCodes.filter((c) => c === postalCode).length === 0 &&
+      pickup === ''
+    ) {
       console.log('invalid')
       setAlertText(`we only deliver to the following postcodes
       3171, 3149, 3150, 3168, 3166`)
@@ -39,46 +43,46 @@ const ShippingScreen = ({ history }) => {
         <CheckoutSteps step1 step2 />
         <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
-          <Form.Group controlId='address'>
+          <Form.Group className={pickup} controlId='address'>
             <Form.Label>Address</Form.Label>
             <Form.Control
               type='text'
               placeholder='Enter address'
               value={address}
-              required
+              required={pickup === '' ? true : false}
               onChange={(e) => setAddress(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId='city'>
+          <Form.Group className={pickup} controlId='city'>
             <Form.Label>City</Form.Label>
             <Form.Control
               type='text'
               placeholder='Enter city'
               value={city}
-              required
+              required={pickup === '' ? true : false}
               onChange={(e) => setCity(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId='postalCode'>
+          <Form.Group className={pickup} controlId='postalCode'>
             <Form.Label>Postal Code</Form.Label>
             <Form.Control
               type='text'
               placeholder='Enter postal code'
               value={postalCode}
-              required
+              required={pickup === '' ? true : false}
               onChange={(e) => setPostalCode(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId='country'>
+          <Form.Group className={pickup} controlId='country'>
             <Form.Label>Country</Form.Label>
             <Form.Control
               type='text'
               placeholder='Enter country'
               value={country}
-              required
+              required={pickup === '' ? true : false}
               onChange={(e) => setCountry(e.target.value)}
             ></Form.Control>
           </Form.Group>
@@ -89,7 +93,12 @@ const ShippingScreen = ({ history }) => {
         <div>{alertText}</div>
       </FormContainer>
       <Form.Group controlId='pickup'>
-        <Form.Check label='pickup' />
+        <Form.Check
+          label='pickup'
+          onChange={(e) =>
+            pickup === '' ? setPickup('d-none') : setPickup('')
+          }
+        />
       </Form.Group>
     </div>
   )

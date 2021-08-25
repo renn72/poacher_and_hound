@@ -39,6 +39,11 @@ a {
   text-decoration: none;
 }
 
+*:focus {
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
 .border-1 {
   border: 1px solid black;
 }

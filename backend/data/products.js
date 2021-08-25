@@ -4,7 +4,7 @@ const products = [
     image: '/images/1.JPG',
     description: 'Yummy breakfast',
     brand: 'food',
-    category: 'breakfast',
+    category: ['breakfast'],
     prices: [10, 15],
     sizes: ['M', 'L'],
     list_order: 0,
