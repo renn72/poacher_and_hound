@@ -7,7 +7,6 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import MenuCategories from '../components/MenuCategories'
-// import ProductCarousel from '../components/ProductCarousel'
 import Meta from '../components/Meta'
 import { listProducts } from '../actions/productActions'
 
@@ -42,18 +41,25 @@ const HomeScreen = ({ match }) => {
               currentCategory={category}
             />
           </Col>
-          <Col xs={12} sm={10} lg={8} className='center'>
+          <Col xs={12} sm={10} lg={8} xl={6} className='center'>
             <Row>
               {category === 'all'
                 ? products.map((product) => (
-                    <Col key={product._id} sm={9} md={6} lg={6} xl={4}>
+                    <Col key={product._id} sm={9} md={6} lg={6} xl={4} xxl={3}>
                       <Product product={product} />
                     </Col>
                   ))
                 : products
                     .filter((product) => product.category === category)
                     .map((product) => (
-                      <Col key={product._id} sm={9} md={6} lg={6} xl={4}>
+                      <Col
+                        key={product._id}
+                        sm={9}
+                        md={6}
+                        lg={6}
+                        xl={4}
+                        xxl={3}
+                      >
                         <Product product={product} />
                       </Col>
                     ))}
@@ -64,7 +70,9 @@ const HomeScreen = ({ match }) => {
               keyword={keyword ? keyword : ''}
             />
           </Col>
-          <Col className='d-none d-lg-block center'>cart</Col>
+          <Col xl={3} className='d-none d-xl-block center border'>
+            Cart
+          </Col>
         </Row>
       )}
     </div>
