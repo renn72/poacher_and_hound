@@ -38,7 +38,7 @@ const CartScreen = ({ match, location, history }) => {
         <h1>Shopping Cart</h1>
         {cartItems.length === 0 ? (
           <Message>
-            Your cart is empty <Link to='/'>Go Back</Link>
+            Your cart is empty <Link to='/catering'>Go Back</Link>
           </Message>
         ) : (
           <ListGroup variant='flush'>
@@ -110,7 +110,7 @@ const CartScreen = ({ match, location, history }) => {
           </ListGroup>
         )}
       </Col>
-      <Col md={4}>
+      <Col md={4} className='py-3'>
         <Card>
           <ListGroup variant='flush'>
             <ListGroup.Item>

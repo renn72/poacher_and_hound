@@ -25,7 +25,7 @@ const App = () => {
     <Router>
       <Header />
       <main>
-        <Container fluid className='px-sm-3 px-xl-5 '>
+        <Container fluid className='px-sm-3 px-xl-2'>
           <Route path='/catering' component={HomeScreen} />
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/shipping' component={ShippingScreen} />

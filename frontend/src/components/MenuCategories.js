@@ -16,7 +16,8 @@ export default function MenuCategories(props) {
                 <Nav.Item>
                   <Button
                     onClick={() => setCategory(category)}
-                    className='w-100 fs-5 py-4 my-1 rounded'
+                    size='lg'
+                    className='w-75 fs-5 py-4 my-1 rounded'
                     variant={
                       currentCategory === category
                         ? 'outline-dark'

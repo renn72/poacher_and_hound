@@ -8,6 +8,7 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import MenuCategories from '../components/MenuCategories'
 import Meta from '../components/Meta'
+import Cart from '../components/Cart'
 import { listProducts } from '../actions/productActions'
 
 const HomeScreen = ({ match }) => {
@@ -35,7 +36,7 @@ const HomeScreen = ({ match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          <Col sm={2} lg={3} className='center'>
+          <Col sm={2} lg={3} xl={2} className='center'>
             <MenuCategories
               setCategory={setCategory}
               currentCategory={category}
@@ -70,8 +71,8 @@ const HomeScreen = ({ match }) => {
               keyword={keyword ? keyword : ''}
             />
           </Col>
-          <Col xl={3} className='d-none d-xl-block center border'>
-            Cart
+          <Col xl={4} className='d-none d-xl-block center border'>
+            <Cart />
           </Col>
         </Row>
       )}
