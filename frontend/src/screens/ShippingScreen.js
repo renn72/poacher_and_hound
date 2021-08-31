@@ -33,7 +33,7 @@ const ShippingScreen = ({ history }) => {
     } else {
       setAlertText('')
       dispatch(saveShippingAddress({ address, city, postalCode, country }))
-      history.push('/payment')
+      history.push('/placeorder')
     }
   }
 
