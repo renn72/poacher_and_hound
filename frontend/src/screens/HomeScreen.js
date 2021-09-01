@@ -36,17 +36,17 @@ const HomeScreen = ({ match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          <Col sm={2} lg={3} xl={2} className='center'>
+          <Col sm={2} lg={3} xl={3} className='center'>
             <MenuCategories
               setCategory={setCategory}
               currentCategory={category}
             />
           </Col>
-          <Col xs={12} sm={10} lg={8} xl={6} className='center'>
+          <Col xs={12} sm={10} lg={9} className='center'>
             <Row>
               {category === 'all'
                 ? products.map((product) => (
-                    <Col key={product._id} sm={9} md={6} lg={6} xl={4} xxl={3}>
+                    <Col key={product._id} sm={9} md={6} lg={4} xl={3} xxl={3}>
                       <Product product={product} />
                     </Col>
                   ))
@@ -70,9 +70,6 @@ const HomeScreen = ({ match }) => {
               page={page}
               keyword={keyword ? keyword : ''}
             />
-          </Col>
-          <Col xl={4} className='d-none d-xl-block center border'>
-            <Cart />
           </Col>
         </Row>
       )}

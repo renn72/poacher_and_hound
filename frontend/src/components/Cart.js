@@ -1,32 +1,14 @@
-import React, { useEffect } from 'react'
-import {
-  Container,
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Form,
-  Button,
-  Card,
-} from 'react-bootstrap'
+import React from 'react'
+import { Row, Col, ListGroup, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import Message from '../components/Message'
 import { Link } from 'react-router-dom'
 
-import { addToCart, removeFromCart } from '../actions/cartActions'
+import { addToCart } from '../actions/cartActions'
 
 export default function Cart() {
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
   const dispatch = useDispatch()
-
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
-  }
-
-  // const checkoutHandler = () => {
-  //   history.push('/login?redirect=shipping')
-  // }
 
   return (
     <div>
