@@ -14,6 +14,10 @@ const RegisterScreen = ({ location, history }) => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
 
+  const [address, setAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [postalCode, setPostalCode] = useState('')
+  const [phone, setPhone] = useState('')
   const dispatch = useDispatch()
 
   const userRegister = useSelector((state) => state.userRegister)
@@ -50,6 +54,46 @@ const RegisterScreen = ({ location, history }) => {
             placeholder='Enter name'
             value={name}
             onChange={(e) => setName(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='address'>
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter address'
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='city'>
+          <Form.Label>City</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter city'
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='postalCode'>
+          <Form.Label>Postal Code</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter postal code'
+            value={postalCode}
+            onChange={(e) => setPostalCode(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='country'>
+          <Form.Label>Phone</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter Phone Number'
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
           ></Form.Control>
         </Form.Group>
 
