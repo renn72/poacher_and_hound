@@ -8,7 +8,6 @@ import Loader from '../components/Loader'
 import Paginate from '../components/Paginate'
 import MenuCategories from '../components/MenuCategories'
 import Meta from '../components/Meta'
-import Cart from '../components/Cart'
 import { listProducts } from '../actions/productActions'
 
 const HomeScreen = ({ match }) => {

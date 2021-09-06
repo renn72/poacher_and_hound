@@ -7,11 +7,9 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    address: {
-      address: { type: String },
-      city: { type: String },
-      postalCode: { type: String },
-    },
+    address: { type: String },
+    city: { type: String },
+    postalCode: { type: String },
     phone: {
       type: String,
     },
