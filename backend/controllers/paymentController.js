@@ -1,8 +1,5 @@
 import Stripe from 'stripe'
-const stripe = new Stripe(
-  'sk_test_51JTzUiL2YutZ2nAIIrIaaP09yJnyt4yhmTIxNFPII5RBiufBvMQmVnmT0uQN0BNIdc9OsRUrQDvNNrWmbEe8zygB00Rqus7szM'
-)
-// ('sk_test_51JTzUiL2YutZ2nAIIrIaaP09yJnyt4yhmTIxNFPII5RBiufBvMQmVnmT0uQN0BNIdc9OsRUrQDvNNrWmbEe8zygB00Rqus7szM')
+const stripe = new Stripe(process.env.STRIPE_KEY)
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
 
@@ -10,15 +7,24 @@ import Order from '../models/orderModel.js'
 // @route POST /api/payment/:id
 // @access Private
 const payOrder = asyncHandler(async (req, res) => {
-  const order = await Order.findById(req.params.id)
-  const { totalPrice } = order
-  const paymentIntent = await stripe.paymentIntents.create({
-    amount: totalPrice,
-    currency: 'aud',
-    metadata: { integration_check: 'accept_a_payment' },
-  })
+  const orderId = req.params.id
+  const order = await Order.findById(orderId)
 
-  res.json({ client_secret: paymentIntent['client_secret'] })
+  if (order) {
+    const { totalPrice } = order
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: totalPrice,
+      currency: 'aud',
+      payment_method_types: ['card'],
+    })
+
+    console.log(paymentIntent.client_secret)
+
+    res.json({ client_secret: paymentIntent.client_secret })
+  } else {
+    res.status(404)
+    throw new Error('Order not found')
+  }
 })
 
 export { payOrder }
