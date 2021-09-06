@@ -1,7 +1,10 @@
 import Stripe from 'stripe'
-const stripe = new Stripe(process.env.STRIPE_KEY)
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
+import dotenv from 'dotenv'
+dotenv.config()
+
+const stripe = new Stripe(process.env.STRIPE_KEY)
 
 // @desc pay order ID
 // @route POST /api/payment/:id
@@ -13,12 +16,12 @@ const payOrder = asyncHandler(async (req, res) => {
   if (order) {
     const { totalPrice } = order
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: totalPrice,
+      amount: +totalPrice * 100,
       currency: 'aud',
       payment_method_types: ['card'],
     })
 
-    console.log(paymentIntent.client_secret)
+    console.log(paymentIntent.amount)
 
     res.json({ client_secret: paymentIntent.client_secret })
   } else {
