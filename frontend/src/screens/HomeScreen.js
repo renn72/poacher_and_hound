@@ -50,7 +50,7 @@ const HomeScreen = ({ match }) => {
                     </Col>
                   ))
                 : products
-                    .filter((product) => product.category === category)
+                    .filter((product) => product.category.includes(category))
                     .map((product) => (
                       <Col
                         key={product._id}

@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Navbar, Col, Nav, Button } from 'react-bootstrap'
 
 export default function MenuCategories(props) {
-  const categories = ['all', 'breakfast', 'lunch', 'dinner']
+  const categories = ['all', 'breakfast', 'morning/afternoon tea', 'lunch']
   const { currentCategory, setCategory } = props
 
   return (
