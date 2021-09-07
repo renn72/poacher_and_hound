@@ -41,9 +41,11 @@ export default function PaymentCard(props) {
 
   return (
     <div>
-      <Card>
-        <CardElement />
-        <Button onClick={handleSubmit}>Pay</Button>
+      <Card className='p-3'>
+        <CardElement className='p-3' />
+        <Button onClick={handleSubmit} className='my-2'>
+          Pay
+        </Button>
       </Card>
     </div>
   )
