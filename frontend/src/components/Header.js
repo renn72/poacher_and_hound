@@ -34,11 +34,6 @@ const Header = () => {
               <LinkContainer to='/catering'>
                 <Nav.Link>Catering</Nav.Link>
               </LinkContainer>
-              <LinkContainer to='/cart'>
-                <Nav.Link>
-                  <i className='fas fa-shopping-cart'></i> Cart
-                </Nav.Link>
-              </LinkContainer>
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id='username'>
                   <LinkContainer to='/profile'>
@@ -70,6 +65,12 @@ const Header = () => {
               )}
             </Nav>
           </Navbar.Collapse>
+
+          <LinkContainer to='/cart'>
+            <Nav.Link>
+              <i className='fas fa-shopping-cart'></i> Cart ()
+            </Nav.Link>
+          </LinkContainer>
         </Container>
       </Navbar>
     </header>

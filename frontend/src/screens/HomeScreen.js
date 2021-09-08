@@ -35,7 +35,7 @@ const HomeScreen = ({ match }) => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <Row>
-          <Col sm={2} lg={3} xl={3} className='center'>
+          <Col sm={2} lg={3} xl={3} className='center px-0'>
             <MenuCategories
               setCategory={setCategory}
               currentCategory={category}

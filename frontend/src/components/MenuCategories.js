@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Navbar, Col, Nav, Button } from 'react-bootstrap'
 
 export default function MenuCategories(props) {
-  const categories = ['all', 'breakfast', 'morning/afternoon tea', 'lunch']
+  const categories = ['all', 'breakfast', 'morning / afternoon tea', 'lunch']
   const { currentCategory, setCategory } = props
 
   return (
@@ -17,7 +17,7 @@ export default function MenuCategories(props) {
                   <Button
                     onClick={() => setCategory(category)}
                     size='lg'
-                    className='w-75 fs-5 py-4 my-1 rounded'
+                    className='w-75 fs-5 py-4 my-1 rounded center'
                     variant={
                       currentCategory === category
                         ? 'outline-dark'
