@@ -10,9 +10,11 @@ const Product = ({ product }) => {
         <Card.Img src={product.image} variant='top' />
       </Link>
 
-      <Card.Body>
+      <Card.Body className='px-0'>
         <Link to={`/product/${product._id}`}>
-          <Card.Title as='h4'>{product.name}</Card.Title>
+          <Card.Title as='h4' className='product-title-height'>
+            {product.name}
+          </Card.Title>
         </Link>
       </Card.Body>
       <Card.Footer as='h3'>${product.prices[0]}</Card.Footer>
