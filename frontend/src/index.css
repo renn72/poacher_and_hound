@@ -44,6 +44,18 @@ a {
   box-shadow: none !important;
 }
 
+.product-count-container {
+  width: 3.5rem;
+}
+
+.product-counter-input {
+  padding: 0.5rem 0.75rem;
+}
+
+.pe-pointer {
+  cursor: pointer !important;
+}
+
 .border-1 {
   border: 1px solid black;
 }

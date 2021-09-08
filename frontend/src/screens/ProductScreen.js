@@ -23,6 +23,13 @@ const ProductScreen = ({ history, match }) => {
     }
   }, [dispatch, match, product._id])
 
+  const updateQty = (value) => {
+    if (value > 999 || value < 0) {
+      return
+    }
+    setQty(Math.floor(value))
+  }
+
   const addToCartHandler = () => {
     // history.push('/catering')
     history.push(`/cart/${match.params.id}?qty=${qty}?size=${size}`)
@@ -41,8 +48,8 @@ const ProductScreen = ({ history, match }) => {
         <div>
           <Meta title={product.name} />
           <Row>
-            <Col md={5}>
-              <Image src={product.image} alt={product.name} fluid />
+            <Col md={4}>
+              <Image src={product.image} alt={product.name} fluid='100%' />
             </Col>
             <Col md={4}>
               <ListGroup variant='flush'>
@@ -53,19 +60,21 @@ const ProductScreen = ({ history, match }) => {
                 <ListGroup.Item>{product.description}</ListGroup.Item>
               </ListGroup>
             </Col>
-            <Col md={3}>
+            <Col md={4}>
               <Card>
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     <Row>
                       <Col>Price:</Col>
-                      <Col>${product.prices[size] * qty}</Col>
+                      <Col className='center'>
+                        ${(product.prices[size] * qty).toFixed(2)}
+                      </Col>
                     </Row>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <Row>
                       <Col>Size:</Col>
-                      <Col>
+                      <Col className='center'>
                         {product.sizes.length > 1 ? (
                           <Form.Control
                             size='sm'
@@ -88,7 +97,7 @@ const ProductScreen = ({ history, match }) => {
                   <ListGroup.Item>
                     <Row>
                       <Col>Status:</Col>
-                      <Col>
+                      <Col className='center'>
                         {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
                       </Col>
                     </Row>
@@ -96,22 +105,33 @@ const ProductScreen = ({ history, match }) => {
 
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
-                      <Row>
-                        <Col>Qty</Col>
+                      <Row className='align-items-center justify-content-around'>
+                        <Col className=''>Qty:</Col>
                         <Col>
-                          <Form.Control
-                            as='select'
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
-                          >
-                            {[...Array(product.countInStock).keys()].map(
-                              (x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              )
-                            )}
-                          </Form.Control>
+                          <Row className='align-items-center justify-content-center'>
+                            <Col
+                              className='center p-0 fs-1 pe-pointer'
+                              onClick={() => updateQty(+qty + 1)}
+                            >
+                              +
+                            </Col>
+                            <Col fluid className='p-0'>
+                              <div className='product-count-container mx-auto'>
+                                <Form.Control
+                                  className='border product-counter-input center'
+                                  type='text'
+                                  value={qty}
+                                  onChange={(e) => updateQty(e.target.value)}
+                                ></Form.Control>
+                              </div>
+                            </Col>
+                            <Col
+                              className='center p-0 fs-1 pe-pointer'
+                              onClick={() => updateQty(+qty - 1)}
+                            >
+                              -
+                            </Col>
+                          </Row>
                         </Col>
                       </Row>
                     </ListGroup.Item>
