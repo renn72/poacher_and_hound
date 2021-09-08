@@ -202,7 +202,7 @@ const products = [
   },
   {
     name: 'Spinach and feta quiche',
-    image: '/images/catering/green_quiche',
+    image: '/images/catering/green_quiche.jpg',
     description:
       'quiches with barrel aged feta ricotta and spinach served warm',
     brand: 'food',
