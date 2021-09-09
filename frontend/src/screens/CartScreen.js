@@ -17,7 +17,7 @@ const CartScreen = ({ match, location, history }) => {
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
-
+  console.log(cartItems.reduce((acc, idx) => acc + idx.qty, 0))
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty, size))
