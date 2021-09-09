@@ -4,11 +4,7 @@ import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import {
-  getOrderDetails,
-  payOrder,
-  deliverOrder,
-} from '../actions/orderActions'
+import { getOrderDetails, deliverOrder } from '../actions/orderActions'
 import {
   ORDER_PAY_RESET,
   ORDER_DELIVER_RESET,
@@ -24,18 +20,10 @@ const stripePromise = loadStripe(
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
 
-  const [sdkReady, setSdkReady] = useState(true)
-
   const dispatch = useDispatch()
 
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
-
-  // const orderPay = useSelector((state) => state.orderPay)
-  // const { loading: loadingPay, success: successPay } = orderPay
-
-  const [loadingPay, setLoadingPay] = useState(false)
-  const [successPay, setSuccessPay] = useState()
 
   const orderDeliver = useSelector((state) => state.orderDeliver)
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
@@ -59,7 +47,7 @@ const OrderScreen = ({ match, history }) => {
       history.push('/login')
     }
 
-    if (!order || successPay || successDeliver || order._id !== orderId) {
+    if (!order || successDeliver || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET })
       dispatch({ type: ORDER_DELIVER_RESET })
       dispatch(getOrderDetails(orderId))
@@ -68,7 +56,7 @@ const OrderScreen = ({ match, history }) => {
       } else {
       }
     }
-  }, [dispatch, orderId, successPay, successDeliver, order, userInfo, history])
+  }, [dispatch, orderId, successDeliver, order, userInfo, history])
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
@@ -167,12 +155,6 @@ const OrderScreen = ({ match, history }) => {
                   <Col>${order.shippingPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
-              {/* <ListGroup.Item>
-                <Row>
-                  <Col>Tax</Col>
-                  <Col>${order.taxPrice.toFixed(2)}</Col>
-                </Row>
-              </ListGroup.Item> */}
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
@@ -181,17 +163,7 @@ const OrderScreen = ({ match, history }) => {
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>
-                  {loadingPay ? (
-                    <Loader />
-                  ) : !sdkReady ? (
-                    <Loader />
-                  ) : (
-                    <PaymentCard
-                      orderId={orderId}
-                      payOrder={payOrder}
-                      setSdkReady={setSdkReady}
-                    />
-                  )}
+                  <PaymentCard orderId={orderId} userName={order.user.name} />
                 </ListGroup.Item>
               )}
               {loadingDeliver && <Loader />}

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useStripe } from '@stripe/react-stripe-js'
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 import {
   ORDER_CREATE_REQUEST,
@@ -102,50 +103,65 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   }
 }
 
-export const payOrder = (orderId, paymentResult) => async (
-  dispatch,
-  getState
-) => {
-  try {
-    dispatch({
-      type: ORDER_PAY_REQUEST,
-    })
+export const payOrder =
+  (orderId, paymentResult) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ORDER_PAY_REQUEST,
+      })
 
-    const {
-      userLogin: { userInfo },
-    } = getState()
+      const {
+        userLogin: { userInfo },
+      } = getState()
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
+      const stripe = useStripe()
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+
+      // const { data } = await axios.put(
+      //   `/api/orders/${orderId}/pay`,
+      //   paymentResult,
+      //   config
+      // )
+      const res = await axios.post(`/api/payment/${orderId}`)
+      const clientSecret = res.data.client_secret
+      console.log('sent to server.... send to stripe')
+      console.log(orderId)
+      const result = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement),
+          billing_details: {
+            name: userInfo.name,
+          },
+          metadata: {
+            id: orderId.toString(),
+          },
+        },
+      })
+
+      dispatch({
+        type: ORDER_PAY_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      if (message === 'Not authorized, token failed') {
+        dispatch(logout())
+      }
+      dispatch({
+        type: ORDER_PAY_FAIL,
+        payload: message,
+      })
     }
-
-    const { data } = await axios.put(
-      `/api/orders/${orderId}/pay`,
-      paymentResult,
-      config
-    )
-
-    dispatch({
-      type: ORDER_PAY_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    if (message === 'Not authorized, token failed') {
-      dispatch(logout())
-    }
-    dispatch({
-      type: ORDER_PAY_FAIL,
-      payload: message,
-    })
   }
-}
 
 export const deliverOrder = (order) => async (dispatch, getState) => {
   try {
