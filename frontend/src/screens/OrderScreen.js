@@ -31,8 +31,11 @@ const OrderScreen = ({ match, history }) => {
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
 
-  const orderPay = useSelector((state) => state.orderPay)
-  const { loading: loadingPay, success: successPay } = orderPay
+  // const orderPay = useSelector((state) => state.orderPay)
+  // const { loading: loadingPay, success: successPay } = orderPay
+
+  const [loadingPay, setLoadingPay] = useState(false)
+  const [successPay, setSuccessPay] = useState()
 
   const orderDeliver = useSelector((state) => state.orderDeliver)
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
@@ -161,25 +164,34 @@ const OrderScreen = ({ match, history }) => {
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${order.shippingPrice}</Col>
+                  <Col>${order.shippingPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
-              <ListGroup.Item>
+              {/* <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${order.taxPrice}</Col>
+                  <Col>${order.taxPrice.toFixed(2)}</Col>
                 </Row>
-              </ListGroup.Item>
+              </ListGroup.Item> */}
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${order.totalPrice}</Col>
+                  <Col>${order.totalPrice.toFixed(2)}</Col>
                 </Row>
               </ListGroup.Item>
               {!order.isPaid && (
                 <ListGroup.Item>
-                  {loadingPay && <Loader />}
-                  {!sdkReady ? <Loader /> : <PaymentCard orderId={orderId} />}
+                  {loadingPay ? (
+                    <Loader />
+                  ) : !sdkReady ? (
+                    <Loader />
+                  ) : (
+                    <PaymentCard
+                      orderId={orderId}
+                      payOrder={payOrder}
+                      setSdkReady={setSdkReady}
+                    />
+                  )}
                 </ListGroup.Item>
               )}
               {loadingDeliver && <Loader />}

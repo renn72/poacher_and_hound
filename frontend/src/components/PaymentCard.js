@@ -7,7 +7,7 @@ export default function PaymentCard(props) {
   const stripe = useStripe()
   const elements = useElements()
 
-  const { orderId } = props
+  const { orderId, payOrder, setSdkReady } = props
 
   const handleSubmit = async (e) => {
     e.preventDefault()

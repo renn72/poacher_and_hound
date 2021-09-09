@@ -87,8 +87,12 @@ const productSchema = mongoose.Schema(
         default: 0,
       },
     ],
-
-    list_order: {
+    inStock: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
+    listOrder: {
       type: Number,
       require: true,
       default: 0,
