@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { useStripe } from '@stripe/react-stripe-js'
 import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 import {
   ORDER_CREATE_REQUEST,
@@ -114,8 +113,6 @@ export const payOrder =
         userLogin: { userInfo },
       } = getState()
 
-      const stripe = useStripe()
-
       const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -123,26 +120,26 @@ export const payOrder =
         },
       }
 
-      // const { data } = await axios.put(
-      //   `/api/orders/${orderId}/pay`,
-      //   paymentResult,
-      //   config
-      // )
-      const res = await axios.post(`/api/payment/${orderId}`)
-      const clientSecret = res.data.client_secret
-      console.log('sent to server.... send to stripe')
-      console.log(orderId)
-      const result = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-          billing_details: {
-            name: userInfo.name,
-          },
-          metadata: {
-            id: orderId.toString(),
-          },
-        },
-      })
+      const { data } = await axios.put(
+        `/api/orders/${orderId}/pay`,
+        paymentResult,
+        config
+      )
+      // const res = await axios.post(`/api/payment/${orderId}`)
+      // const clientSecret = res.data.client_secret
+      // console.log('sent to server.... send to stripe')
+      // console.log(orderId)
+      // const result = await stripe.confirmCardPayment(clientSecret, {
+      //   payment_method: {
+      //     card: elements.getElement(CardElement),
+      //     billing_details: {
+      //       name: userInfo.name,
+      //     },
+      //     metadata: {
+      //       id: orderId.toString(),
+      //     },
+      //   },
+      // })
 
       dispatch({
         type: ORDER_PAY_SUCCESS,
