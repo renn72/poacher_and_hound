@@ -1,6 +1,5 @@
-import React from 'react';
-import { Container, Row, Col, Nav } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import React from 'react'
+import { Container, Row, Col, Nav } from 'react-bootstrap'
 
 const Footer = () => {
   return (
@@ -13,26 +12,19 @@ const Footer = () => {
             </Col>
           </Row>
           <Nav className='justify-content-end'>
-            <LinkContainer to='/'>
-              <Nav.Link>
-                <i className='fab fa-facebook-square fa-2x'></i>
-              </Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/'>
-              <Nav.Link>
-                <i className='fab fa-twitter-square fa-2x'></i>
-              </Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/'>
-              <Nav.Link>
-                <i className='fab fa-tiktok fa-2x'></i>
-              </Nav.Link>
-            </LinkContainer>
+            <a
+              target='_blank'
+              rel='noreferrer'
+              href='https://www.facebook.com/PoacherandHound'
+              className='link-dark'
+            >
+              <i className='fab fa-facebook-square fa-2x'></i>
+            </a>
           </Nav>
         </Container>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

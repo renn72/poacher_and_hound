@@ -12,8 +12,8 @@ const Meta = ({ title, description, keywords }) => {
 }
 
 Meta.defaultProps = {
-  title: 'Sambos Shop',
-  description: 'The best fish and chips in town',
+  title: 'Poacher and Hound',
+  description: 'Modern Cafe, and offsite catering',
   keywords: 'food, catering, cheap catering, melbourne catering',
 }
 
