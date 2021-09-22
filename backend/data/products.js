@@ -270,7 +270,7 @@ const products = [
   },
   {
     name: 'Bolognese Arancini',
-    image: '/images/arancini.jpg',
+    image: '/images/catering/arancini.jpg',
     description:
       'Cheese and bolognese filled arancini, made in-house, gluten free',
     brand: 'food',
@@ -284,7 +284,7 @@ const products = [
   },
   {
     name: 'Vegetarian Arancini',
-    image: '/images/arancini.jpg',
+    image: '/images/catering/arancini.jpg',
     description:
       'Cheese and vegetable filled arancini, made in house, gluten free',
     brand: 'food',
@@ -298,7 +298,7 @@ const products = [
   },
   {
     name: 'Vegetarian Uramaki Sampler',
-    image: '/images/ss_veg_uramaki.jpg',
+    image: '/images/catering/ss_veg_uramaki.jpg',
     description:
       'Serves 4, 12 x Tofu Inari and Cucumber, 12 x Vegetarian, 12 x Cucumber Avocado, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins, Gluten free',
     brand: 'food',
@@ -312,7 +312,7 @@ const products = [
   },
   {
     name: 'Vegetarian Platter',
-    image: '/images/ss_veg_platter.jpg',
+    image: '/images/catering/ss_veg_platter.jpg',
     description:
       'Serves 4, 12 x Tofu Inari and Cucumber, 12 x Vegetarian, 12 x Cucumber and Avocado, 2 x Plain Inari, 2 x Avocado Nigiri, Edamame, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins, Gluten free',
     brand: 'food',
@@ -326,7 +326,7 @@ const products = [
   },
   {
     name: 'Sushi Deluxe platter',
-    image: '/images/ss_sushi_deluxe_platter.jpg',
+    image: '/images/catering/ss_sushi_deluxe_platter.jpg',
     description:
       'Assorted sushi, serves 7,  2 x Salmon Maki, 1 x Cucumber Maki, 1 x Radish Maki, 6 x California Futomaki Roll, 6 x Vegetarian Futomaki Roll, 4 x Tobiko Roll, 1 x Seafood Inari, 2 x Prawn Nigiri, 9 x Salmon Nigiri, 2 x Unagi Nigiri, 2 x Tamago Nigiri, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins',
     brand: 'food',
@@ -340,7 +340,7 @@ const products = [
   },
   {
     name: 'Assorted Uramaki Platter',
-    image: '/images/ss_assorted_uramaki_platter.jpg',
+    image: '/images/catering/ss_assorted_uramaki_platter.jpg',
     description:
       'Serves 8 10 x California, 12 x Cooked Tuna and Cucumber, 11 x Cucumber and Avocado, 12 x Crispy Chicken, 11 x Prawn and Cucumber, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins',
     brand: 'food',
@@ -354,7 +354,7 @@ const products = [
   },
   {
     name: 'Assorted Uramaki Sampler',
-    image: '/images/ss_assorted_uramaki_sampler.jpg',
+    image: '/images/catering/ss_assorted_uramaki_sampler.jpg',
     description:
       'Serves 5, 6 x California, 6 x Cooked Tuna and Cucumber, 6 x Cucumber and Avocado, 6 x Crispy Chicken, 6 x Prawn and Cucumber, 6 x Teriyaki Chicken, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins',
     brand: 'food',
@@ -368,7 +368,7 @@ const products = [
   },
   {
     name: 'Assorted Maki',
-    image: '/images/ss_assorted_maki.jpg',
+    image: '/images/catering/ss_assorted_maki.jpg',
     description:
       'Serves 8, 20 x Salmon Maki, 20 x Cucumber Maki, 20 x Radish Maki, 20 x Cooked Tuna Maki, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins, Gluten free',
     brand: 'food',
@@ -382,7 +382,7 @@ const products = [
   },
   {
     name: 'Assorted Hand Roll',
-    image: '/images/ss_assorted_hand_rolls.jpg',
+    image: '/images/catering/ss_assorted_hand_rolls.jpg',
     description:
       'Serves 8, 8 x Avocado, 8 x California, 8 x Cooked Tuna and Avocado, 8 x Prawn and Avocado, 8 x Salmon and Avocado, 8 x Teriyaki Chicken, 8 x Vegetarian, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins',
     brand: 'food',
