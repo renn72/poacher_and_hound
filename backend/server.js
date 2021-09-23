@@ -16,6 +16,8 @@ dotenv.config()
 
 connectDB()
 
+// comment
+
 const app = express()
 
 if (process.env.NODE_ENV === 'development') {
