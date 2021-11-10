@@ -298,7 +298,7 @@ const products = [
   },
   {
     name: 'Vegetarian Uramaki Sampler',
-    image: '/images/catering/ss_veg_uramaki.jpg',
+    image: '/images/catering/s_veg_uramaki.jpg',
     description:
       'Serves 4, 12 x Tofu Inari and Cucumber, 12 x Vegetarian, 12 x Cucumber Avocado, supplied by Sushi Sushi, comes with soy sauce, condiments and napkins, Gluten free',
     brand: 'food',
