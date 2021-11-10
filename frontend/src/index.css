@@ -73,6 +73,12 @@ a {
   margin: 0.1rem;
 }
 
+.cafe-menu-btn {
+  margin-bottom: 1rem;
+  padding: 1rem 2rem;
+  border-radius: 10%;
+}
+
 .product-title-height {
   height: 3rem;
 }

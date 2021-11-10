@@ -1,5 +1,5 @@
-import React from 'react';
-import { Row, Col, Image, Container } from 'react-bootstrap';
+import React from 'react'
+import { Row, Col, Image, Container, Button } from 'react-bootstrap'
 // import { Image } from 'react-bootstrap';
 
 const Cafe = () => {
@@ -18,6 +18,9 @@ const Cafe = () => {
         </div>
       </div>
       <div className='cafe-info-box py-5'>
+        <a href='https://www.mryum.com/poacher/dine-in'>
+          <Button className='cafe-menu-btn'>Menu</Button>
+        </a>
         <div className='opening-hours'>
           Breakfast and Lunch <br />
           Monday to Friday | 6:00am to 3:00pm <br />
@@ -53,7 +56,7 @@ const Cafe = () => {
         </Container>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Cafe;
+export default Cafe
