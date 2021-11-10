@@ -8,7 +8,7 @@
 - Admin product management
 - Admin user management
 - Admin Order details page
-- Mark orders as delivered option
+- Mark orders as delivered option.
 - Checkout process (shipping, payment method, etc)
 
 - Data Models
