@@ -1,6 +1,5 @@
 import React from 'react'
-import { Row, Col, Image, Container, Button } from 'react-bootstrap'
-// import { Image } from 'react-bootstrap';
+import { Row, Col, Image, Container } from 'react-bootstrap'
 
 const Cafe = () => {
   return (
