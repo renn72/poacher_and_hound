@@ -35,6 +35,14 @@ const Header = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ms-auto'>
+              <Nav.Link className='position-relative'>
+                <a
+                  className='link-dark stretched-link'
+                  href='https://www.mryum.com/poacher/dine-in'
+                >
+                  Cafe Menu
+                </a>
+              </Nav.Link>
               <LinkContainer to='/catering'>
                 <Nav.Link>Catering</Nav.Link>
               </LinkContainer>

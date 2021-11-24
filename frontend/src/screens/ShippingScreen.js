@@ -10,9 +10,9 @@ const ShippingScreen = ({ history }) => {
   const { shippingAddress } = cart
 
   const [address, setAddress] = useState(shippingAddress.address || '')
-  const [city, setCity] = useState(shippingAddress.city || '')
+  const [suburb, setSuburb] = useState(shippingAddress.suburb || '')
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode || '')
-  const [country, setCountry] = useState(shippingAddress.country || '')
+  const [phone, setPhone] = useState(shippingAddress.phone || '')
   const [alertText, setAlertText] = useState('')
   const [pickup, setPickup] = useState('')
 
@@ -32,7 +32,9 @@ const ShippingScreen = ({ history }) => {
       3171, 3149, 3150, 3168, 3166`)
     } else {
       setAlertText('')
-      dispatch(saveShippingAddress({ address, city, postalCode, country }))
+      if (pickup === '') {
+        dispatch(saveShippingAddress({ address, suburb, postalCode, phone }))
+      }
       history.push('/placeorder')
     }
   }
@@ -54,14 +56,14 @@ const ShippingScreen = ({ history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group className={pickup} controlId='city'>
-            <Form.Label>City</Form.Label>
+          <Form.Group className={pickup} controlId='suburb'>
+            <Form.Label>Suburb</Form.Label>
             <Form.Control
               type='text'
-              placeholder='Enter city'
-              value={city}
+              placeholder='Enter suburb'
+              value={suburb}
               required={pickup === '' ? true : false}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={(e) => setSuburb(e.target.value)}
             ></Form.Control>
           </Form.Group>
 
@@ -76,14 +78,14 @@ const ShippingScreen = ({ history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group className={pickup} controlId='country'>
-            <Form.Label>Country</Form.Label>
+          <Form.Group className={pickup} controlId='phone'>
+            <Form.Label>Phone</Form.Label>
             <Form.Control
               type='text'
-              placeholder='Enter country'
-              value={country}
+              placeholder='Enter phone number'
+              value={phone}
               required={pickup === '' ? true : false}
-              onChange={(e) => setCountry(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             ></Form.Control>
           </Form.Group>
           <Button type='submit' variant='primary'>
@@ -91,15 +93,15 @@ const ShippingScreen = ({ history }) => {
           </Button>
         </Form>
         <div>{alertText}</div>
+        <Form.Group controlId='pickup'>
+          <Form.Check
+            label='pickup'
+            onChange={(e) =>
+              pickup === '' ? setPickup('d-none') : setPickup('')
+            }
+          />
+        </Form.Group>
       </FormContainer>
-      <Form.Group controlId='pickup'>
-        <Form.Check
-          label='pickup'
-          onChange={(e) =>
-            pickup === '' ? setPickup('d-none') : setPickup('')
-          }
-        />
-      </Form.Group>
     </div>
   )
 }

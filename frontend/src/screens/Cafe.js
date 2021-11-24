@@ -18,9 +18,6 @@ const Cafe = () => {
         </div>
       </div>
       <div className='cafe-info-box py-5'>
-        <a href='https://www.mryum.com/poacher/dine-in'>
-          <Button className='cafe-menu-btn'>Menu</Button>
-        </a>
         <div className='opening-hours'>
           Breakfast and Lunch <br />
           Monday to Friday | 6:00am to 3:00pm <br />
