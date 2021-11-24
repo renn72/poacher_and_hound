@@ -14,7 +14,7 @@ const HomeScreen = ({ match }) => {
   const [category, setCategory] = useState('all')
 
   const productList = useSelector((state) => state.productList)
-  const { loading, error, products } = productList
+  const { error, products } = productList
 
   useEffect(() => {
     dispatch(listProducts())
@@ -24,7 +24,12 @@ const HomeScreen = ({ match }) => {
     <div className='py-4'>
       <Meta />
 
-      {loading ? (
+      {/* {loading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>{error}</Message> */}
+
+      {products.length === 0 ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>

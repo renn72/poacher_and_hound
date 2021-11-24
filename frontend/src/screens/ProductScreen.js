@@ -6,6 +6,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import Meta from '../components/Meta'
 import { listProductDetails } from '../actions/productActions'
+import { addToCart } from '../actions/cartActions'
 
 const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
@@ -32,7 +33,8 @@ const ProductScreen = ({ history, match }) => {
 
   const addToCartHandler = () => {
     // history.push('/catering')
-    history.push(`/cart/${match.params.id}?qty=${qty}?size=${size}`)
+    dispatch(addToCart(product._id, qty, size))
+    // history.push(`/cart/${match.params.id}?qty=${qty}?size=${size}`)
   }
 
   return (
@@ -49,12 +51,18 @@ const ProductScreen = ({ history, match }) => {
           <Meta title={product.name} />
           <Row>
             <Col md={4}>
-              <Image src={product.image} alt={product.name} fluid='100%' />
+              <Image src={product.image} alt={product.name} fluid />
             </Col>
             <Col md={4}>
               <ListGroup variant='flush'>
                 <ListGroup.Item>
-                  <h3>{product.name}</h3>
+                  {product.unitsPerSize[size] === 1 ? (
+                    <h3>{product.name}</h3>
+                  ) : (
+                    <h3>
+                      {product.name} ({product.unitsPerSize[size]})
+                    </h3>
+                  )}
                 </ListGroup.Item>
 
                 <ListGroup.Item>{product.description}</ListGroup.Item>
@@ -80,7 +88,7 @@ const ProductScreen = ({ history, match }) => {
                             size='sm'
                             as='select'
                             value={size}
-                            onChange={(e) => setSize(e.target.value)}
+                            onChange={(e) => setSize(+e.target.value)}
                           >
                             {product.sizes.map((size, i) => (
                               <option key={i} value={i}>

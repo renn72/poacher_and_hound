@@ -79,10 +79,16 @@ const productSchema = mongoose.Schema(
         default: 0,
       },
     ],
-
     sizes: [
       {
         type: String,
+        required: true,
+        default: 0,
+      },
+    ],
+    unitsPerSize: [
+      {
+        type: Number,
         required: true,
         default: 0,
       },
@@ -100,7 +106,7 @@ const productSchema = mongoose.Schema(
     countInStock: {
       type: Number,
       required: true,
-      default: 0,
+      default: 999,
     },
   },
   {

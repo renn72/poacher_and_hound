@@ -17,15 +17,15 @@ const CartScreen = ({ match, location, history }) => {
 
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
-  console.log(cartItems.reduce((acc, idx) => acc + idx.qty, 0))
+  // console.log(cartItems.reduce((acc, idx) => acc + idx.qty, 0))
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty, size))
     }
   }, [dispatch, productId, qty, size])
 
-  const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id))
+  const removeFromCartHandler = (id, sizeId) => {
+    dispatch(removeFromCart(id, sizeId))
   }
 
   const checkoutHandler = () => {
@@ -42,8 +42,8 @@ const CartScreen = ({ match, location, history }) => {
           </Message>
         ) : (
           <ListGroup variant='flush'>
-            {cartItems.map((item) => (
-              <ListGroup.Item key={item.product}>
+            {cartItems.map((item, i) => (
+              <ListGroup.Item key={i}>
                 <Row className='align-items-center'>
                   <Col md={2}>
                     <Image src={item.image} alt={item.name} fluid rounded />
@@ -99,7 +99,9 @@ const CartScreen = ({ match, location, history }) => {
                     <Button
                       type='button'
                       variant='light'
-                      onClick={() => removeFromCartHandler(item.product)}
+                      onClick={() =>
+                        removeFromCartHandler(item.product, item.sizeId)
+                      }
                     >
                       <i className='fas fa-trash'></i>
                     </Button>
