@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
+import { Button, Row, Col, ListGroup, Image, Card, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/CheckoutSteps'
@@ -8,17 +8,38 @@ import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { USER_DETAILS_RESET } from '../constants/userConstants'
 
+const timesArray = [
+  '0600',
+  '0630',
+  '0700',
+  '0730',
+  '0800',
+  '0830',
+  '0900',
+  '0930',
+  '1000',
+  '1030',
+  '1100',
+  '1130',
+  '1200',
+  '1230',
+  '1300',
+  '1330',
+  '1400',
+]
+
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
+  const [orderTime, setOrderTime] = useState('Select a Time')
 
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.userLogin.userInfo)
 
-  if (!cart.shippingAddress.address) {
-    history.push('/shipping')
-  } else if (!cart.paymentMethod) {
-    // history.push('/payment');
-  }
+  // if (!cart.shippingAddress.address) {
+  //   history.push('/shipping')
+  // } else if (!cart.paymentMethod) {
+  //   // history.push('/payment');
+  // }
   //   Calculate prices
   const addDecimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
@@ -63,17 +84,18 @@ const PlaceOrderScreen = ({ history }) => {
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>
-            <ListGroup.Item>
+            {/* <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
                 <strong>Address:</strong>
                 {cart.shippingAddress.address}, {cart.shippingAddress.suburb}{' '}
                 {cart.shippingAddress.postalCode}, {cart.shippingAddress.phone}
               </p>
-            </ListGroup.Item>
+            </ListGroup.Item> */}
 
             <ListGroup.Item>
               <h2>Order</h2>
+              <hr />
               {cart.cartItems.length === 0 ? (
                 <Message>Your cart is empty</Message>
               ) : (
@@ -114,6 +136,41 @@ const PlaceOrderScreen = ({ history }) => {
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
+                  <h3>Delivery Info</h3>
+                </Row>
+                {cart.shippingAddress.isPickup ? (
+                  <div>
+                    <Row>
+                      <Col className='h5'>Pickup</Col>
+                    </Row>
+                    <Row>
+                      <Col xs={4}>Phone</Col>
+                      <Col>{cart.shippingAddress.phone}</Col>
+                    </Row>
+                  </div>
+                ) : (
+                  <div>
+                    <Row>
+                      <Col xs={4}>Address</Col>
+                      <Col>{cart.shippingAddress.address}</Col>
+                    </Row>
+                    <Row>
+                      <Col xs={4}>Suburb</Col>
+                      <Col>{cart.shippingAddress.suburb}</Col>
+                    </Row>
+                    <Row>
+                      <Col xs={4}>PostCode</Col>
+                      <Col>{cart.shippingAddress.postalCode}</Col>
+                    </Row>
+                    <Row>
+                      <Col xs={4}>Phone</Col>
+                      <Col>{cart.shippingAddress.phone}</Col>
+                    </Row>
+                  </div>
+                )}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
                   <Col>Items</Col>
                   <Col>${cart.itemsPrice}</Col>
                 </Row>
@@ -129,6 +186,16 @@ const PlaceOrderScreen = ({ history }) => {
                   <Col>Total</Col>
                   <Col>${cart.totalPrice}</Col>
                 </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Form>
+                  <Form.Control as='select'>
+                    <option>Select a Time</option>
+                    {timesArray.map((t) => (
+                      <option value='t'>{t}</option>
+                    ))}
+                  </Form.Control>
+                </Form>
               </ListGroup.Item>
               <ListGroup.Item>
                 {error && <Message variant='danger'>{error}</Message>}

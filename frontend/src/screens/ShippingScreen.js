@@ -32,9 +32,10 @@ const ShippingScreen = ({ history }) => {
       3171, 3149, 3150, 3168, 3166`)
     } else {
       setAlertText('')
-      if (pickup === '') {
-        dispatch(saveShippingAddress({ address, suburb, postalCode, phone }))
-      }
+      const isPickup = pickup === '' ? false : true
+      dispatch(
+        saveShippingAddress({ address, suburb, postalCode, phone, isPickup })
+      )
       history.push('/placeorder')
     }
   }
@@ -78,13 +79,13 @@ const ShippingScreen = ({ history }) => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group className={pickup} controlId='phone'>
+          <Form.Group controlId='phone'>
             <Form.Label>Phone</Form.Label>
             <Form.Control
               type='text'
               placeholder='Enter phone number'
               value={phone}
-              required={pickup === '' ? true : false}
+              required={true}
               onChange={(e) => setPhone(e.target.value)}
             ></Form.Control>
           </Form.Group>

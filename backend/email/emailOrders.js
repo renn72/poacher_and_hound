@@ -45,15 +45,15 @@ const newOrder = (data) => {
       console.error(error)
     })
 
-  msg.to = 'enquiries@poacherandhound.com.au'
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log('Email sent')
-    })
-    .catch((error) => {
-      console.error(error)
-    })
+  // msg.to = 'enquiries@poacherandhound.com.au'
+  // sgMail
+  //   .send(msg)
+  //   .then(() => {
+  //     console.log('Email sent')
+  //   })
+  //   .catch((error) => {
+  //     console.error(error)
+  //   })
 }
 
 export { newOrder }
