@@ -12,6 +12,7 @@ const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
 
   const cart = useSelector((state) => state.cart)
+  const user = useSelector((state) => state.userLogin.userInfo)
 
   if (!cart.shippingAddress.address) {
     history.push('/shipping')
@@ -26,7 +27,7 @@ const PlaceOrderScreen = ({ history }) => {
   cart.itemsPrice = addDecimals(
     cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0)
   )
-  cart.shippingPrice = addDecimals(cart.itemsPrice > 100 ? 0 : 10)
+  cart.shippingPrice = addDecimals(cart.itemsPrice > 10000 ? 0 : 10)
   cart.totalPrice = (
     Number(cart.itemsPrice) + Number(cart.shippingPrice)
   ).toFixed(2)
@@ -51,6 +52,7 @@ const PlaceOrderScreen = ({ history }) => {
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.shippingPrice,
         totalPrice: cart.totalPrice,
+        user: user,
       })
     )
   }
@@ -65,9 +67,8 @@ const PlaceOrderScreen = ({ history }) => {
               <h2>Shipping</h2>
               <p>
                 <strong>Address:</strong>
-                {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
-                {cart.shippingAddress.postalCode},{' '}
-                {cart.shippingAddress.country}
+                {cart.shippingAddress.address}, {cart.shippingAddress.suburb}{' '}
+                {cart.shippingAddress.postalCode}, {cart.shippingAddress.phone}
               </p>
             </ListGroup.Item>
 
