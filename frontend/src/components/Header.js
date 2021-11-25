@@ -25,7 +25,7 @@ const Header = () => {
           <LinkContainer to='/'>
             <Navbar.Brand>
               <Image
-                src='./images/P+H.LOGO_BOX.png'
+                src='/images/P+H.LOGO_BOX.png'
                 width='120'
                 className=''
                 alt='P + H logo'
