@@ -7,6 +7,7 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { USER_DETAILS_RESET } from '../constants/userConstants'
+import DatePicker from '../components/DatePicker'
 
 const timesArray = [
   '0600',
@@ -30,7 +31,9 @@ const timesArray = [
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
-  const [orderTime, setOrderTime] = useState('Select a Time')
+  const [deliveryTime, setDeliveryTime] = useState('Select a Time')
+  const [deliveryDate, setDeliveryDate] = useState('')
+  const [deliveryDetails, setDeliveryDetails] = useState('')
 
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.userLogin.userInfo)
@@ -74,6 +77,9 @@ const PlaceOrderScreen = ({ history }) => {
         shippingPrice: cart.shippingPrice,
         totalPrice: cart.totalPrice,
         user: user,
+        deliveryTime: deliveryTime,
+        deliveryDate: deliveryDate,
+        deliveryDetails: deliveryDetails,
       })
     )
   }
@@ -169,6 +175,37 @@ const PlaceOrderScreen = ({ history }) => {
                   </div>
                 )}
               </ListGroup.Item>
+
+              <ListGroup.Item>
+                <Row>
+                  <Form>
+                    <Form.Control
+                      as='select'
+                      onChange={(e) => setDeliveryTime(e.target.value)}
+                    >
+                      <option>Select a Time</option>
+                      {timesArray.map((t) => (
+                        <option value={t} key={t}>
+                          {t}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form>
+                </Row>
+                <Row className='my-1'>
+                  <DatePicker setDeliveryDate={setDeliveryDate} />
+                </Row>
+                <Row className='my-1'>
+                  <Form>
+                    <Form.Control
+                      as='textarea'
+                      placeholder='extra information'
+                      rows={3}
+                      onChange={(e) => setDeliveryDetails(e.target.value)}
+                    />
+                  </Form>
+                </Row>
+              </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
@@ -188,23 +225,17 @@ const PlaceOrderScreen = ({ history }) => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Form>
-                  <Form.Control as='select'>
-                    <option>Select a Time</option>
-                    {timesArray.map((t) => (
-                      <option value='t'>{t}</option>
-                    ))}
-                  </Form.Control>
-                </Form>
-              </ListGroup.Item>
-              <ListGroup.Item>
                 {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
                   type='button'
                   className='btn-block'
-                  disabled={cart.cartItems === 0}
+                  disabled={
+                    cart.cartItems === 0 ||
+                    deliveryTime === '' ||
+                    deliveryDate === ''
+                  }
                   onClick={placeOrderHandler}
                 >
                   Place Order

@@ -5,9 +5,22 @@ const newOrder = (data) => {
   // console.log(data.toString())
   // console.log(JSON.stringify(data))
 
+  const orderPlaced = new Date(Date.parse(data.createdOrder.createdAt))
+  const deliveryDate = new Date(data.createdOrder.deliveryDate)
+
   let text = ''
 
   text += '<h1>New Order</h1>'
+  text += `<h6>Time Placed: ${orderPlaced} </h6>`
+  text += `<h3>Delivery: ${
+    data.createdOrder.deliveryTime
+  }, ${deliveryDate.toDateString()}</h3>`
+  if (data.createdOrder.deliveryDetails !== '') {
+    text += `<h4>Details: ${data.createdOrder.deliveryDetails}</h4>`
+  }
+  text += `<h4>id: ${data.createdOrder._id}</h4>`
+  text += `<h4>paid: ${data.createdOrder.isPaid}</h4>`
+  text += `<h4></h4>`
   text += '<hr>'
   text += '<ul>'
   data.orderItems.forEach((item) => {
