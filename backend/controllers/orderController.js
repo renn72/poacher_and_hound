@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
-import { emailOrder } from '../email/emailOrders.js'
+import { sendEmailOrder } from '../email/emailOrders.js'
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -56,7 +56,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
     //   createdOrder,
     // })
 
-    emailOrder({ createdOrder, user: req.user })
+    sendEmailOrder({ createdOrder, user: req.user })
 
     res.status(201).json(createdOrder)
   }
@@ -142,6 +142,15 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 })
 
+// @desc    Update order to delivered
+// @route   GET /api/orders/:id/deliver
+// @access  Private/Admin
+const emailOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id)
+
+  sendEmailOrder({ createdOrder: order, user: req.user })
+})
+
 // @desc    Get logged in user orders
 // @route   GET /api/orders/myorders
 // @access  Private
@@ -165,4 +174,5 @@ export {
   getMyOrders,
   getOrders,
   updateOrderToPaid,
+  emailOrder,
 }

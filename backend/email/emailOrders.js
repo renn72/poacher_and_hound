@@ -1,6 +1,6 @@
 import sgMail from '@sendgrid/mail'
 
-const emailOrder = ({ createdOrder, user }) => {
+const sendEmailOrder = ({ createdOrder, user }) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   // console.log(data.toString())
   // console.log(JSON.stringify(data))
@@ -81,4 +81,4 @@ const emailOrder = ({ createdOrder, user }) => {
   //   })
 }
 
-export { emailOrder }
+export { sendEmailOrder }

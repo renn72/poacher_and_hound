@@ -201,6 +201,34 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
   }
 }
 
+export const emailOrder = (order) => async (dispatch, getState) => {
+  try {
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.put(`/api/orders/${order._id}/email`, {}, config)
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: ORDER_DELIVER_FAIL,
+      payload: message,
+    })
+  }
+}
+
 export const payOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({

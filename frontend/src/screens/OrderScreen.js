@@ -8,6 +8,7 @@ import {
   getOrderDetails,
   deliverOrder,
   payOrder,
+  emailOrder,
 } from '../actions/orderActions'
 import {
   ORDER_PAY_RESET,
@@ -66,6 +67,10 @@ const OrderScreen = ({ match, history }) => {
   }
   const paidHandler = () => {
     dispatch(payOrder(order))
+  }
+
+  const emailHandler = () => {
+    dispatch(emailOrder(order))
   }
 
   return loading ? (
@@ -218,6 +223,15 @@ const OrderScreen = ({ match, history }) => {
                   </Button>
                 </ListGroup.Item>
               )}
+              <ListGroup.Item>
+                <Button
+                  type='button'
+                  className='btn btn-block'
+                  onClick={emailHandler}
+                >
+                  Email Printable Version
+                </Button>
+              </ListGroup.Item>
             </ListGroup>
           </Card>
         </Col>
