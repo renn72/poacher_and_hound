@@ -91,11 +91,17 @@ const OrderScreen = ({ match, history }) => {
                 <strong>Email: </strong>{' '}
                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
               </p>
-              <p>
-                <strong>Address:</strong>
-                {order.shippingAddress.address}, {order.shippingAddress.suburb}{' '}
-                {order.shippingAddress.postalCode}
-              </p>
+
+              {order.shippingAddress.isPickup ? (
+                <h3> -- PICKUP -- </h3>
+              ) : (
+                <p>
+                  <strong>Address:</strong>
+                  {order.shippingAddress.address},{' '}
+                  {order.shippingAddress.suburb}{' '}
+                  {order.shippingAddress.postalCode}
+                </p>
+              )}
               <p>
                 <strong>Phone:</strong>
                 {order.shippingAddress.phone}

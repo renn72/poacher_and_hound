@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
-import { newOrder } from '../email/emailOrders.js'
+import { emailOrder } from '../email/emailOrders.js'
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -40,21 +40,23 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
     const createdOrder = await order.save()
 
-    // console.log(createdOrder)
-    newOrder({
-      orderItems,
-      user: req.user,
-      shippingAddress,
-      paymentMethod,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice,
-      deliveryTime,
-      deliveryDate,
-      deliveryDetails,
-      createdOrder,
-    })
+    console.log(createdOrder)
+    // newOrder({
+    //   orderItems,
+    //   user: req.user,
+    //   shippingAddress,
+    //   paymentMethod,
+    //   itemsPrice,
+    //   taxPrice,
+    //   shippingPrice,
+    //   totalPrice,
+    //   deliveryTime,
+    //   deliveryDate,
+    //   deliveryDetails,
+    //   createdOrder,
+    // })
+
+    emailOrder({ createdOrder, user: req.user })
 
     res.status(201).json(createdOrder)
   }

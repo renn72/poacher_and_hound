@@ -1,29 +1,40 @@
 import sgMail from '@sendgrid/mail'
 
-const newOrder = (data) => {
+const emailOrder = ({ createdOrder, user }) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY)
   // console.log(data.toString())
   // console.log(JSON.stringify(data))
 
-  const orderPlaced = new Date(Date.parse(data.createdOrder.createdAt))
-  const deliveryDate = new Date(data.createdOrder.deliveryDate)
+  const {
+    createdAt,
+    deliveryDate,
+    deliveryTime,
+    deliveryDetails,
+    _id,
+    isPaid,
+    orderItems,
+    shippingPrice,
+    totalPrice,
+    shippingAddress,
+  } = createdOrder
+
+  const orderPlaced = new Date(Date.parse(createdAt))
+  const formattedDeliveryDate = new Date(deliveryDate)
 
   let text = ''
 
   text += '<h1>New Order</h1>'
   text += `<h5>Time Placed: ${orderPlaced} </h5>`
-  text += `<h2>Delivery: ${
-    data.createdOrder.deliveryTime
-  }, ${deliveryDate.toDateString()}</h2>`
-  if (data.createdOrder.deliveryDetails !== '') {
-    text += `<h3>Details: ${data.createdOrder.deliveryDetails}</h3>`
+  text += `<h2>Delivery: ${deliveryTime}, ${formattedDeliveryDate.toDateString()}</h2>`
+  if (deliveryDetails !== '') {
+    text += `<h3>Details: ${deliveryDetails}</h3>`
   }
-  text += `<h4>id: ${data.createdOrder._id}</h4>`
-  text += `<h4>paid: ${data.createdOrder.isPaid}</h4>`
+  text += `<h4>id: ${_id}</h4>`
+  text += `<h4>paid: ${isPaid}</h4>`
   text += `<h4></h4>`
   text += '<hr>'
   text += '<ul>'
-  data.orderItems.forEach((item) => {
+  orderItems.forEach((item) => {
     const { name, qty, size } = item
     const s = `<li><h2>${qty} X ${size} : ${name} </h2></li>`
     text += s
@@ -33,20 +44,21 @@ const newOrder = (data) => {
 
   text += '<br>'
 
-  text += `<h3>Total: $${data.itemsPrice} + $${data.shippingPrice} + $${data.totalPrice}</h3>`
+  text += `<h3>Shipping: $${shippingPrice}, Total: $${totalPrice}</h3>`
 
   text += '<br>'
-  text += data.user.name + '<br>'
-  text += data.user.email + '<br>' + '<br>'
-  text += data.shippingAddress.address + '<br>'
-  text += data.shippingAddress.suburb + '<br>'
-  text += data.shippingAddress.postalCode + '<br>'
-  text += data.shippingAddress.phone + '<br>'
+  text += user.name + '<br>'
+  text += user.email + '<br>' + '<br>'
+  text += shippingAddress.isPickup ? '<h3>-- PICKUP --</h3>' + '<br>' : ''
+  text += shippingAddress.address + '<br>'
+  text += shippingAddress.suburb + '<br>'
+  text += shippingAddress.postalCode + '<br>'
+  text += shippingAddress.phone + '<br>'
 
   const msg = {
     to: 'renwa6801@gmail.com', // Change to your recipient
     from: 'test@warner.systems', // Change to your verified sender
-    subject: `New Order for ${data.user.name}`,
+    subject: `New Order for ${user.name}`,
     html: text,
   }
   sgMail
@@ -69,4 +81,4 @@ const newOrder = (data) => {
   //   })
 }
 
-export { newOrder }
+export { emailOrder }

@@ -52,7 +52,10 @@ const OrderListScreen = ({ history }) => {
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>
                   {order.deliveryTime} :{' '}
-                  {new Date(order.deliveryDate).toDateString()}
+                  {new Date(order.deliveryDate).toDateString()}{' '}
+                  {order.shippingAddress.isPickup && (
+                    <strong>--PICKUP--</strong>
+                  )}
                 </td>
                 <td>${order.totalPrice}</td>
                 <td>

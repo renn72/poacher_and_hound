@@ -18,6 +18,7 @@ const orderSchema = mongoose.Schema(
           required: true,
           ref: 'Product',
         },
+        size: { type: String },
       },
     ],
     shippingAddress: {
@@ -25,6 +26,7 @@ const orderSchema = mongoose.Schema(
       suburb: { type: String, required: true },
       postalCode: { type: String, required: true },
       phone: { type: String, required: true },
+      isPickup: { type: Boolean },
     },
     paymentMethod: {
       type: String,
