@@ -74,6 +74,10 @@ const OrderScreen = ({ match, history }) => {
             <ListGroup.Item>
               <h2>Shipping</h2>
               <p>
+                Ordered on:
+                {order.createdAt.substring(0, 10)}
+              </p>
+              <p>
                 <strong>Name: </strong> {order.user.name}
               </p>
               <p>
@@ -82,9 +86,21 @@ const OrderScreen = ({ match, history }) => {
               </p>
               <p>
                 <strong>Address:</strong>
-                {order.shippingAddress.address}, {order.shippingAddress.city}{' '}
-                {order.shippingAddress.postalCode},{' '}
-                {order.shippingAddress.country}
+                {order.shippingAddress.address}, {order.shippingAddress.suburb}{' '}
+                {order.shippingAddress.postalCode}
+              </p>
+              <p>
+                <strong>Phone:</strong>
+                {order.shippingAddress.phone}
+              </p>
+              <p>
+                Delivery:
+                {order.deliveryTime} :{' '}
+                {new Date(order.deliveryDate).toDateString()}
+              </p>
+              <p>
+                Details:
+                {order.deliveryDetails}
               </p>
               {order.isDelivered ? (
                 <Message variant='success'>

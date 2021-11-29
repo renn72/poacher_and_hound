@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Table, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import { listOrders } from '../actions/orderActions';
+import React, { useEffect } from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listOrders } from '../actions/orderActions'
 
 const OrderListScreen = ({ history }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const orderList = useSelector((state) => state.orderList);
-  const { loading, error, orders } = orderList;
+  const orderList = useSelector((state) => state.orderList)
+  const { loading, error, orders } = orderList
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listOrders());
+      dispatch(listOrders())
     } else {
-      history.push('/login');
+      history.push('/login')
     }
-  }, [dispatch, history, userInfo]);
+  }, [dispatch, history, userInfo])
 
   return (
     <div>
@@ -37,6 +37,7 @@ const OrderListScreen = ({ history }) => {
               <th>ID</th>
               <th>USER</th>
               <th>DATE</th>
+              <th>DELIVERY</th>
               <th>TOTAL</th>
               <th>PAID</th>
               <th>DELIVERED</th>
@@ -49,6 +50,10 @@ const OrderListScreen = ({ history }) => {
                 <td>{order._id}</td>
                 <td>{order.user && order.user.name}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
+                <td>
+                  {order.deliveryTime} :{' '}
+                  {new Date(order.deliveryDate).toDateString()}
+                </td>
                 <td>${order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (
@@ -77,7 +82,7 @@ const OrderListScreen = ({ history }) => {
         </Table>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default OrderListScreen;
+export default OrderListScreen
