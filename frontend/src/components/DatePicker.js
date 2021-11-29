@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 
-export default function DatePicker({ setDeliveryDate }) {
+export default function DatePicker({ deliveryDate, changeDateHandler }) {
   return (
     <div>
       <Form.Group controlId='dob'>
@@ -9,7 +9,8 @@ export default function DatePicker({ setDeliveryDate }) {
           type='date'
           name='dob'
           placeholder='Delivery Date'
-          onChange={(e) => setDeliveryDate(e.target.value)}
+          value={deliveryDate}
+          onChange={(e) => changeDateHandler(e.target.value)}
         />
       </Form.Group>
     </div>

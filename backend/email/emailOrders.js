@@ -11,12 +11,12 @@ const newOrder = (data) => {
   let text = ''
 
   text += '<h1>New Order</h1>'
-  text += `<h6>Time Placed: ${orderPlaced} </h6>`
-  text += `<h3>Delivery: ${
+  text += `<h5>Time Placed: ${orderPlaced} </h5>`
+  text += `<h2>Delivery: ${
     data.createdOrder.deliveryTime
-  }, ${deliveryDate.toDateString()}</h3>`
+  }, ${deliveryDate.toDateString()}</h2>`
   if (data.createdOrder.deliveryDetails !== '') {
-    text += `<h4>Details: ${data.createdOrder.deliveryDetails}</h4>`
+    text += `<h3>Details: ${data.createdOrder.deliveryDetails}</h3>`
   }
   text += `<h4>id: ${data.createdOrder._id}</h4>`
   text += `<h4>paid: ${data.createdOrder.isPaid}</h4>`

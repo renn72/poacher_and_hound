@@ -10,8 +10,6 @@ import { USER_DETAILS_RESET } from '../constants/userConstants'
 import DatePicker from '../components/DatePicker'
 
 const timesArray = [
-  '0600',
-  '0630',
   '0700',
   '0730',
   '0800',
@@ -27,12 +25,24 @@ const timesArray = [
   '1300',
   '1330',
   '1400',
+  '1430',
+  '1500',
 ]
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
-  const [deliveryTime, setDeliveryTime] = useState('Select a Time')
-  const [deliveryDate, setDeliveryDate] = useState('')
+  const [deliveryTime, setDeliveryTime] = useState('')
+  const [deliveryDateAlert, setDeliveryDateAlert] = useState('mx-4 my-2')
+  const [deliveryDate, setDeliveryDate] = useState(() => {
+    const d = new Date()
+    return (
+      `${d.getUTCFullYear()}` +
+      '-' +
+      `${d.getUTCMonth() + 1}` +
+      '-' +
+      `${d.getUTCDate()}`
+    )
+  })
   const [deliveryDetails, setDeliveryDetails] = useState('')
 
   const cart = useSelector((state) => state.cart)
@@ -68,6 +78,19 @@ const PlaceOrderScreen = ({ history }) => {
     // eslint-disable-next-line
   }, [history, success])
 
+  const changeDateHandler = (d) => {
+    const newDay = new Date(d).getUTCDay()
+    if (newDay === 0 || newDay === 6) {
+      setDeliveryDateAlert('mx-4 my-2 bg-warning')
+      return
+    } else {
+      setDeliveryDate(d)
+      if (deliveryDateAlert === 'mx-4 my-2 bg-warning') {
+        setDeliveryDateAlert('mx-4 my-2')
+      }
+    }
+  }
+
   const placeOrderHandler = () => {
     dispatch(
       createOrder({
@@ -79,7 +102,7 @@ const PlaceOrderScreen = ({ history }) => {
         user: user,
         deliveryTime: deliveryTime,
         deliveryDate: deliveryDate,
-        deliveryDetails: deliveryDetails,
+        deliveryDetails: deliveryDetails === '' ? 'Nil' : deliveryDetails,
       })
     )
   }
@@ -193,7 +216,11 @@ const PlaceOrderScreen = ({ history }) => {
                   </Form>
                 </Row>
                 <Row className='my-1'>
-                  <DatePicker setDeliveryDate={setDeliveryDate} />
+                  <DatePicker
+                    deliveryDate={deliveryDate}
+                    changeDateHandler={changeDateHandler}
+                  />
+                  <Col className={deliveryDateAlert}>Monday - Friday</Col>
                 </Row>
                 <Row className='my-1'>
                   <Form>
