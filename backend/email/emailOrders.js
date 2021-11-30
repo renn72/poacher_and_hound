@@ -56,8 +56,8 @@ const sendEmailOrder = ({ createdOrder, user }) => {
   text += shippingAddress.phone + '<br>'
 
   const msg = {
-    to: 'renwa6801@gmail.com', // Change to your recipient
-    from: 'test@warner.systems', // Change to your verified sender
+    to: 'poacher@warner.systems', // Change to your recipient
+    from: 'enquiries@poacherandhound.com.au', // Change to your verified sender
     subject: `New Order for ${user.name}`,
     html: text,
   }
@@ -70,15 +70,15 @@ const sendEmailOrder = ({ createdOrder, user }) => {
       console.error(error)
     })
 
-  // msg.to = 'enquiries@poacherandhound.com.au'
-  // sgMail
-  //   .send(msg)
-  //   .then(() => {
-  //     console.log('Email sent')
-  //   })
-  //   .catch((error) => {
-  //     console.error(error)
-  //   })
+  msg.to = 'enquiries@poacherandhound.com.au'
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log('Email sent')
+    })
+    .catch((error) => {
+      console.error(error)
+    })
 }
 
 export { sendEmailOrder }
