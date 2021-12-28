@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {createPortal} from 'react-dom'
 import { Link } from 'react-router-dom'
 import { Button, Row, Col, ListGroup, Image, Card, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
@@ -7,7 +8,8 @@ import CheckoutSteps from '../components/CheckoutSteps'
 import { createOrder } from '../actions/orderActions'
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
 import { USER_DETAILS_RESET } from '../constants/userConstants'
-import DatePicker from '../components/DatePicker'
+import 'react-datepicker/src/stylesheets/datepicker.scss'
+import DatePicker from 'react-datepicker'
 
 const timesArray = [
   '0700',
@@ -32,21 +34,22 @@ const timesArray = [
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
   const [deliveryTime, setDeliveryTime] = useState('')
-  const [deliveryDateAlert, setDeliveryDateAlert] = useState('mx-4 my-2')
-  const [deliveryDate, setDeliveryDate] = useState(() => {
-    const d = new Date()
-    return (
-      `${d.getUTCFullYear()}` +
-      '-' +
-      `${d.getUTCMonth() + 1}` +
-      '-' +
-      `${d.getUTCDate()}`
-    )
-  })
+  const [deliveryDate, setDeliveryDate] = useState('')
   const [deliveryDetails, setDeliveryDetails] = useState('')
 
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.userLogin.userInfo)
+
+// () => {
+//     const d = new Date()
+//     return (
+//       `${d.getUTCFullYear()}` +
+//       '-' +
+//       `${d.getUTCMonth() + 1}` +
+//       '-' +
+//       `${d.getUTCDate()}`
+//     )
+//   }
 
   // if (!cart.shippingAddress.address) {
   //   history.push('/shipping')
@@ -79,16 +82,13 @@ const PlaceOrderScreen = ({ history }) => {
   }, [history, success])
 
   const changeDateHandler = (d) => {
-    const newDay = new Date(d).getUTCDay()
-    if (newDay === 0 || newDay === 6) {
-      setDeliveryDateAlert('mx-4 my-2 bg-warning')
-      return
-    } else {
-      setDeliveryDate(d)
-      if (deliveryDateAlert === 'mx-4 my-2 bg-warning') {
-        setDeliveryDateAlert('mx-4 my-2')
-      }
-    }
+    console.log(d)
+    setDeliveryDate(d)
+  }
+
+  const isWeekday = (date) => {
+    const day = date.getDay()
+    return day !== 0 && day !== 6;
   }
 
   const placeOrderHandler = () => {
@@ -215,12 +215,18 @@ const PlaceOrderScreen = ({ history }) => {
                     </Form.Control>
                   </Form>
                 </Row>
-                <Row className='my-1'>
+                <Row className='position-relative'>
+                  <Col className='d-inline'>
                   <DatePicker
-                    deliveryDate={deliveryDate}
-                    changeDateHandler={changeDateHandler}
-                  />
-                  <Col className={deliveryDateAlert}>Monday - Friday</Col>
+                    selected={deliveryDate}
+                    onChange={(d) => changeDateHandler(d)}
+                    popperContainer={({children}) => createPortal(children,document.body)}
+                    isClearable
+                    minDate={new Date()}
+                    filterDate={isWeekday}
+                    excludeDateIntervals={[{start: new Date('12/28/21'), end: new Date('1/10/22')}]}
+                    />
+                  </Col>
                 </Row>
                 <Row className='my-1'>
                   <Form>

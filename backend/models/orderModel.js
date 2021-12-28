@@ -22,9 +22,9 @@ const orderSchema = mongoose.Schema(
       },
     ],
     shippingAddress: {
-      address: { type: String, required: true },
-      suburb: { type: String, required: true },
-      postalCode: { type: String, required: true },
+      address: { type: String },
+      suburb: { type: String },
+      postalCode: { type: String },
       phone: { type: String, required: true },
       isPickup: { type: Boolean },
     },

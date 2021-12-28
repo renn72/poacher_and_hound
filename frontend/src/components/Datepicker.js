@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
 
-export default function DatePicker({ deliveryDate, changeDateHandler }) {
+export default function Datepicker({ deliveryDate, changeDateHandler }) {
   return (
     <div>
       <Form.Group controlId='dob'>
