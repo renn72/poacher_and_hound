@@ -20,13 +20,13 @@ const Cafe = () => {
         <div className='opening-hours'>
         Dear beloved customers <br />
         <br />
-        If you're reading this, we're still down at the beach washing away 2021. <br />
+        {/* If you're reading this, we're still down at the beach washing away 2021. <br />
         We'll be back brighter than ever on Monday the 10th of January. <br />
-        We hope you've had a happy and safe festive season <br />
-          {/* Breakfast and Lunch <br />
+        We hope you've had a happy and safe festive season <br /> */}
+          Breakfast and Lunch <br />
           Monday to Friday | 6:00am to 3:00pm <br />
           Saturday, Sunday | closed <br />
-          Public Holiday's | closed <br /> */}
+          Public Holiday's | closed <br />
         </div>
       </div>
       <div className='cafe-cards-container py-5 my-4'>
