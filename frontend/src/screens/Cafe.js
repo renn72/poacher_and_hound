@@ -18,8 +18,8 @@ const Cafe = () => {
       </div>
       <div className='cafe-info-box py-5'>
         <div className='opening-hours'>
-        Dear beloved customers <br />
-        <br />
+        {/* Dear beloved customers <br />
+        <br /> */}
         {/* If you're reading this, we're still down at the beach washing away 2021. <br />
         We'll be back brighter than ever on Monday the 10th of January. <br />
         We hope you've had a happy and safe festive season <br /> */}
